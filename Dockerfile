@@ -16,7 +16,8 @@ RUN chown -R apache:apache /var/www
 ENV APACHE_RUN_USER apache
 ENV APACHE_RUN_GROUP apache
 ENV APACHE_LOG_DIR /var/log/apache2
-
 EXPOSE 80
-
 CMD ["/usr/sbin/apache2", "-D",  "FOREGROUND"]
+# add non-root user and switch to it
+RUN useradd -u 8877 john
+USER john
